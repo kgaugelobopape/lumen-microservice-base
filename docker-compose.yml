@@ -1,0 +1,50 @@
+version: '3'
+
+networks:
+  laravel:
+    driver: bridge
+
+services:
+
+  site:
+    build:
+      context: .
+      dockerfile: docker/nginx.dockerfile
+    container_name: nginx
+    ports:
+      - "8001:80"
+    volumes:
+      - ./src:/var/www/html:delegated
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - laravel
+
+  php:
+    build:
+      context: .
+      dockerfile: docker/php.dockerfile
+    container_name: php
+    working_dir: /var/www/html/public
+    volumes:
+      - ./src:/var/www/html:delegated
+    ports:
+      - "9001:9000"
+    networks:
+      - laravel
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    volumes:
+      - ./src:/var/www/html
+      - ./nginx/grafana.ini:/etc/grafana/grafana.ini
+      - ./grafana:/var/lib/grafana
+    ports:
+      - "3000:3000"
+    depends_on:
+      - php
+      - mysql
+    networks:
+      - laravel

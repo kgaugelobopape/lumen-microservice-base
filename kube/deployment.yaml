@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: service-name
+spec:
+  selector:
+    matchLabels:
+      run: service-name
+  template:
+    metadata:
+      labels:
+        run: service-name
+    spec:
+      containers:
+        - name: service-name
+          image: larmola/service-name
+          ports:
+            - containerPort: 80
+          env:
+            - name: APP_KEY
+              value: base64:cUPmwHx4LXa4Z25HhzFiWCf7TlQmSqnt98pnuiHmzgY=
