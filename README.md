@@ -5,20 +5,30 @@
 [![Latest Stable Version](https://img.shields.io/packagist/v/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
 [![License](https://img.shields.io/packagist/l/laravel/framework)](https://packagist.org/packages/laravel/lumen-framework)
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax.
 
-## Official Documentation
+### Run docker
+1. Clone the repo and ``cd`` in to it.
+2. Make sure you have docker installed
+3. Run ``docker-compose up -d --build``
+4. Default DB connection is ``sqlite``, make changes to the ``.env`` file for your app.
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+### Run traditionally
+1. ``cd`` into src folder of cloned repo
+2. Run ``php -S localhost:8000 -t public``
+3. Switch to browser of your choice and go to ``http://localhost:8000``  
 
-## Contributing
+### Kubernetes
+First, login to docker hub ``docker login`` and follow the steps.
 
-Thank you for considering contributing to Lumen! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Secondly, build the image and push to docker registry
+``docker build -t registry-url/project-path .`` and
+``docker push registry-url/project-path``
 
-## Security Vulnerabilities
+In kube folder, I have added 2 files, 
+1. To register the service ``service.yml``, please update service name
+2. To deploy service container ``deployment.yml``, please update registry and image name.
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
-
-## License
+### License
 
 The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
