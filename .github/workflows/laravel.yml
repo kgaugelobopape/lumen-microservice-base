@@ -2,19 +2,19 @@ name: Laravel
 
 on:
   push:
-    branches: [ main ]
+    branches: [ staging ]
   pull_request:
     branches: [ main ]
 
 jobs:
   laravel-tests:
-
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
     - name: Change directory
-      run: cd /src/
+      run: cd ~/src/
+    - name: Working Directory
+      run: pwd
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
