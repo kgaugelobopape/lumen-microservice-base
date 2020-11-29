@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
         - name: service-name
-          image: larmola/service-name
+          image: your-registry/docker-image-name
           ports:
             - containerPort: 80
           env:
