@@ -1,29 +1,29 @@
-name: Laravel
+name: Lumen
 
 on:
   push:
-    branches: [ main ]
+    branches: [ staging ]
   pull_request:
     branches: [ main ]
 
 jobs:
-  laravel-tests:
-
+  tests:
     runs-on: ubuntu-latest
-
     steps:
     - uses: actions/checkout@v2
-    - name: Change directory
-      run: cd /src/
     - name: Copy .env
+      working-directory: ./src
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
+      working-directory: ./src
       run: composer install -q --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
     - name: Create Database
+      working-directory: ./src
       run: |
         mkdir -p database
         touch database/database.sqlite
     - name: Execute tests (Unit and Feature tests) via PHPUnit
+      working-directory: ./src
       env:
         DB_CONNECTION: sqlite
         DB_DATABASE: database/database.sqlite
