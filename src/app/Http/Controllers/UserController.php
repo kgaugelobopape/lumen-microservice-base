@@ -44,9 +44,9 @@
         public function create(Request $request)
         {
             $this->validate($request, [
-                'name'      => 'required|string',
-                'email'           => 'required|string|email|unique:users',
-                'password'        => 'required|string|confirmed',
+                'name'     => 'required|string',
+                'email'    => 'required|string|email|unique:users',
+                'password' => 'required|string|confirmed',
             ]);
 
             $user = $this->user->create($request->all());
