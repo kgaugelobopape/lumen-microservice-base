@@ -2,12 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Traits\ApiResponser;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
 class AuthenticateAccess
 {
+    Use ApiResponser;
     /**
      * Handle an incoming request.
      *
@@ -23,6 +25,6 @@ class AuthenticateAccess
             return $next($request);
         }
 
-        abort(Response::HTTP_UNAUTHORIZED);
+        return $this->errorResponse('Unauthorized request key', Response::HTTP_UNAUTHORIZED);
     }
 }
